@@ -23,7 +23,7 @@ Pin exact versions in this file when each piece is scaffolded.
 - Run API: `dotnet run --project src/Api` (health check at `/health`)
 - Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
 - Still to add: run client, test, add migration, seed.
-- Environment note: currently on .NET 9 (`global.json`, `UseAppHost=false`) because the dev machine's Windows build (10.0.21996) can't run .NET 10 tooling or Docker Desktop. Revert to .NET 10 after upgrading Windows.
+- Environment note: currently on .NET 9 (`global.json`, `UseAppHost=false`) because the dev machine's Windows build (10.0.21996) can't run .NET 10 tooling (Docker Desktop works). Revert to .NET 10 after upgrading Windows.
 
 ## Workflow (important)
 - Work in small slices. Write a short plan for the slice, then implement only that.
