@@ -19,7 +19,11 @@ Pin exact versions in this file when each piece is scaffolded.
 - `client/` - React app
 
 ## Commands
-Fill in once scaffolded: build, run API, run client, test, add migration, seed.
+- Build: `dotnet build`
+- Run API: `dotnet run --project src/Api` (health check at `/health`)
+- Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
+- Still to add: run client, test, add migration, seed.
+- Environment note: currently on .NET 9 (`global.json`, `UseAppHost=false`) because the dev machine's Windows build (10.0.21996) can't run .NET 10 tooling (Docker Desktop works). Revert to .NET 10 after upgrading Windows.
 
 ## Workflow (important)
 - Work in small slices. Write a short plan for the slice, then implement only that.
@@ -33,6 +37,23 @@ Fill in once scaffolded: build, run API, run client, test, add migration, seed.
 - Controllers stay thin: validate, call a service, map to a DTO. Never return entities.
 - Use async/await with `CancellationToken` for I/O.
 - Forbidden: secrets in source or `appsettings.json`, `DateTime.Now` (use UTC), business logic in controllers.
+### Patterns We Use
+- Primary constructors for DI
+- Records for DTOs and commands
+- Result<T> pattern for error handling (no exceptions for flow control)
+- File-scoped namespaces
+- Always pass CancellationToken to async methods
+
+### Patterns We DON'T Use (Never Suggest)
+- Repository pattern (use EF Core directly)
+- AutoMapper (write explicit mappings)
+- Exceptions for business logic errors
+- Stored procedures
+
+## Validation
+- All request validation in FluentValidation validators
+- Validators auto-registered via assembly scanning
+- Validation runs in Mediator pipeline behavior
 
 ## Conventions
 - Errors: one consistent JSON shape via global exception handling; stack traces only in Development.
@@ -40,14 +61,10 @@ Fill in once scaffolded: build, run API, run client, test, add migration, seed.
 - Naming: `PascalCase` C# types, DTOs suffixed `Dto`, async methods suffixed `Async`.
 - Usernames are unique case-insensitively. Registration enforces age 18+.
 
-## Known bugs to avoid repeating
-- Gender filter defaults to the opposite gender (original had a `"fale"` typo).
-- Like button must work on both member card and member detail.
-- Message is hard-deleted only after BOTH sender and recipient have deleted it.
-- Never allow deleting the current main photo or removing the seed admin's Admin role.
 
-## Glossary
-Member (user profile), Like, Message (soft-deleted per side), Presence (online/offline, multi-connection), Main photo, Moderator/Admin roles.
 
-## Out of scope (unless asked)
-Photo moderation workflow (admin tab is a stub), mutual matches, unlike, blocking, typing indicator, multi-instance presence backplane.
+## Git Workflow
+- Branch naming: `feature/`, `bugfix/`, `hotfix/`
+- Commit format: `type: description` (feat, fix, refactor, test, docs)
+- Always create a branch before changes
+- Run tests before committing

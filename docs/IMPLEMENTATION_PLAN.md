@@ -8,8 +8,8 @@ Task ids: `P<phase>.<n>`. Branch names are suggestions.
 Goal: repo and a running empty API.
 - [x] P0.1 `chore/project-setup`: git repo, `.gitignore`, `CLAUDE.md`
 - [x] P0.2 `docs/project-scope`: project scope
-- [ ] P0.3 `feature/api-scaffold`: .NET 10 API + solution, `/health` endpoint (blocked: compiler needs newer Windows or Docker)
-- [ ] P0.4 `chore/dev-environment`: Docker Compose for PostgreSQL, README with run instructions, fill in CLAUDE.md commands
+- [x] P0.3 `feature/api-scaffold`: API + solution, `/health` endpoint (on .NET 9 for now, move to .NET 10 after the Windows upgrade)
+- [x] P0.4 `chore/dev-environment`: Docker Compose for PostgreSQL, README with run instructions, fill in CLAUDE.md commands
 - [ ] P0.5 `chore/ci-build`: GitHub Actions workflow that builds and tests on every push
 
 Demo: `dotnet run` and `/health` returns Healthy; CI is green.
