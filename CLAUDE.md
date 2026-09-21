@@ -23,6 +23,8 @@ Pin exact versions in this file when each piece is scaffolded.
 - Run API: `dotnet run --project src/Api` (health check at `/health`)
 - Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
 - Still to add: run client, test, add migration, seed.
+- Add migration: `dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Api`
+- Apply migrations: `dotnet ef database update --project src/Infrastructure --startup-project src/Api`
 - Environment note: currently on .NET 9 (`global.json`, `UseAppHost=false`) because the dev machine's Windows build (10.0.21996) can't run .NET 10 tooling (Docker Desktop works). Revert to .NET 10 after upgrading Windows.
 
 ## Workflow (important)
