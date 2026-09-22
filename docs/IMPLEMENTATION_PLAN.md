@@ -17,7 +17,7 @@ Demo: `dotnet run` and `/health` returns Healthy; CI is green.
 ## Phase 1: Foundations (accounts and auth)
 Goal: register, log in, call a protected endpoint.
 - [x] P1.1 `feature/db-setup`: EF Core + PostgreSQL, `AppDbContext`, first migration
-- [ ] P1.2 `feature/identity-model`: `AppUser` and `AppRole` with Identity tables
+- [x] P1.2 `feature/identity-model`: `AppUser` and `AppRole` with Identity tables
 - [ ] P1.3 `feature/error-handling`: global exception handler, one JSON error shape, stack trace in Development only
 - [ ] P1.4 `feature/auth-register`: register endpoint, age 18+ and case-insensitive unique username validation, assign Member role
 - [ ] P1.5 `feature/auth-login`: login endpoint, JWT with id, username and role claims
