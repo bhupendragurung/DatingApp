@@ -58,7 +58,8 @@ Pin exact versions in this file when each piece is scaffolded.
 - Validation runs in Mediator pipeline behavior
 
 ## Conventions
-- Errors: one consistent JSON shape via global exception handling; stack traces only in Development.
+- Errors: RFC 9457 `ProblemDetails` (`application/problem+json`) via a global `IExceptionHandler`, with the real HTTP status code (400/404/500/etc.); stack traces only in Development.
+- Entity configuration: one `IEntityTypeConfiguration<T>` class per entity in `src/Infrastructure`, applied via `ApplyConfigurationsFromAssembly`, not inline in `OnModelCreating`.
 - Secrets: environment variables, user-secrets locally, App Service settings/Key Vault in prod.
 - Naming: `PascalCase` C# types, DTOs suffixed `Dto`, async methods suffixed `Async`.
 - Usernames are unique case-insensitively. Registration enforces age 18+.
