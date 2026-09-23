@@ -3,6 +3,7 @@ using System;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260923094604_AddUserProfileFields")]
+    partial class AddUserProfileFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,29 +50,6 @@ namespace Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e01"),
-                            ConcurrencyStamp = "7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e01",
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
-                        },
-                        new
-                        {
-                            Id = new Guid("7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e02"),
-                            ConcurrencyStamp = "7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e02",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e03"),
-                            ConcurrencyStamp = "7d3f9a4e-2b1c-4e8a-9f6d-1a2b3c4d5e03",
-                            Name = "Moderator",
-                            NormalizedName = "MODERATOR"
-                        });
                 });
 
             modelBuilder.Entity("Infrastructure.Identity.AppUser", b =>

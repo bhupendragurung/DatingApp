@@ -1,6 +1,8 @@
 
 
 using Api;
+using Api.Common.Behaviors;
+using FluentValidation;
 using Infrastructure;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -14,9 +16,16 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
     .Enrich.FromLogContext()
     .WriteTo.Console());
 builder.Services.AddControllers();
+builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddOpenApi();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+builder.Services.AddMediator(options =>
+{
+    options.ServiceLifetime = ServiceLifetime.Scoped;
+    options.PipelineBehaviors = [typeof(ValidationBehavior<,>)];
+});
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??throw new InvalidOperationException("ConnectionStrings:DefaultConnection is not configured.");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddDataProtection();

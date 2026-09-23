@@ -12,5 +12,10 @@ namespace Infrastructure
     : IdentityDbContext<AppUser, AppRole, Guid>(options)
     {
         
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
     }
 }
