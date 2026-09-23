@@ -4,7 +4,7 @@ Portfolio dating app built fresh on the latest tech, in small vertical slices. F
 
 ## Tech stack
 Pin exact versions in this file when each piece is scaffolded.
-- Backend: .NET 10 Web API, EF Core, ASP.NET Core Identity + JWT bearer
+- Backend: .NET 10 Web API, EF Core, ASP.NET Core Identity + JWT bearer, Mediator 3.0.2 (source-generated), FluentValidation 12.1.1
 - Database: PostgreSQL (Azure Database for PostgreSQL in prod)
 - Real-time: SignalR (presence + chat hubs)
 - Frontend: React + TypeScript, Vite, React Router, TanStack Query, Vitest
@@ -12,16 +12,18 @@ Pin exact versions in this file when each piece is scaffolded.
 - Hosting: Azure App Service (API serves the built SPA, with SPA fallback routing)
 
 ## Structure (created as needed, not up front)
-- `src/Api/` - controllers, hubs, middleware, DI setup
+- `src/Api/` - HTTP layer (controllers, middleware, DI) plus `Features/<Feature>/` vertical slices (command/query, validator, handler, DTO per use case) and `Common/` (pipeline behaviors, Result→ProblemDetails mapping)
 - `src/Domain/` - entities and business rules, no framework dependencies
 - `src/Infrastructure/` - EF Core, migrations, Blob Storage, seed data
 - `tests/` - unit and integration tests
+- `requests/` - `.http` files for manual API testing
 - `client/` - React app
 
 ## Commands
 - Build: `dotnet build`
 - Run API: `dotnet run --project src/Api` (health check at `/health`)
 - Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
+- Try the API: run it, then open `requests/*.http` (VS Code REST Client) and send requests.
 - Still to add: run client, test, seed.
 - Add migration: `dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Api`
 - Apply migrations: `dotnet ef database update --project src/Infrastructure --startup-project src/Api`
