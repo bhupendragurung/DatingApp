@@ -1,6 +1,9 @@
 namespace Domain.Common;
-
-public class Result
+public interface IResultFailure<TSelf> where TSelf : IResultFailure<TSelf>
+{
+    static abstract TSelf Failure(Error error);
+}
+public class Result :IResultFailure<Result>
 {
     public bool IsSuccess { get; }
     public bool IsFailure => !IsSuccess;
@@ -16,7 +19,7 @@ public class Result
     public static Result Failure(Error error) => new(false, error);
 }
 
-public sealed class Result<TValue> : Result
+public sealed class Result<TValue> : Result, IResultFailure<Result<TValue>>
 {
     private readonly TValue? _value;
 
