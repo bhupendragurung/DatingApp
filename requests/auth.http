@@ -1,0 +1,85 @@
+@baseUrl = http://localhost:5136
+
+### 1. Valid registration → 201
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "bob",
+  "password": "Pa$$w0rd",
+  "knownAs": "Bob",
+  "gender": "male",
+  "dateOfBirth": "1995-04-12",
+  "city": "London",
+  "country": "UK"
+}
+
+### 2. Same username, different case → 409
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "BOB",
+  "password": "Pa$$w0rd",
+  "knownAs": "Bobby",
+  "gender": "male",
+  "dateOfBirth": "1995-04-12",
+  "city": "London",
+  "country": "UK"
+}
+
+### 3. Under 18 (turns 18 tomorrow) → 400 errors.DateOfBirth
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "young",
+  "password": "Pa$$w0rd",
+  "knownAs": "Young",
+  "gender": "female",
+  "dateOfBirth": "2008-09-24",
+  "city": "Paris",
+  "country": "France"
+}
+
+### 4. Exactly 18 today → 201
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "justeighteen",
+  "password": "Pa$$w0rd",
+  "knownAs": "Eighteen",
+  "gender": "female",
+  "dateOfBirth": "2008-09-23",
+  "city": "Paris",
+  "country": "France"
+}
+
+### 5. "fale" typo + weak password → 400 errors.Gender only
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "typo",
+  "password": "abc",
+  "knownAs": "Typo",
+  "gender": "fale",
+  "dateOfBirth": "1990-01-01",
+  "city": "Rome",
+  "country": "Italy"
+}
+
+### 6. Weak password → 400 errors.Password (from Identity)
+POST {{baseUrl}}/api/account/register
+Content-Type: application/json
+
+{
+  "userName": "weakpass",
+  "password": "abc",
+  "knownAs": "Weak",
+  "gender": "female",
+  "dateOfBirth": "1990-01-01",
+  "city": "Rome",
+  "country": "Italy"
+}
