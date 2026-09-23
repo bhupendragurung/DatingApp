@@ -11,4 +11,4 @@ public sealed record RegisterCommand(
     string Gender,
     DateOnly DateOfBirth,
     string City,
-    string Country) : IRequest<UserDto>;
+    string Country) :  IRequest<Result<UserDto>>;
