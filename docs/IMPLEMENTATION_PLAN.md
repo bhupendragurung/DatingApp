@@ -20,7 +20,7 @@ Goal: register, log in, call a protected endpoint.
 - [x] P1.2 `feature/identity-model`: `AppUser` and `AppRole` with Identity tables
 - [x] P1.3 `feature/error-handling`: global exception handler, one JSON error shape, stack trace in Development only
 - [x] P1.4 `feature/auth-register`: register endpoint, age 18+ and case-insensitive unique username validation, assign Member role
-- [ ] P1.5 `feature/auth-login`: login endpoint, JWT with id, username and role claims
+- [x] P1.5 `feature/auth-login`: login endpoint, JWT with id, username and role claims
 - [ ] P1.6 `feature/authorization-policies`: Admin and Moderator policies, a protected test endpoint
 - [ ] P1.7 `feature/seed-data`: seed roles and the admin account from a data file; secrets via user-secrets
 - [ ] P1.8 `feature/auth-tests`: tests for register validation and token issuance
