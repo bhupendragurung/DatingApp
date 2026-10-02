@@ -1,5 +1,6 @@
 
 
+ using Api.Common.Auth;
 using Api;
 using Api.Common.Behaviors;
 using FluentValidation;
@@ -26,6 +27,10 @@ builder.Services.AddMediator(options =>
     options.PipelineBehaviors = [typeof(ValidationBehavior<,>)];
 });
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+builder.Services.AddOptions<JwtOptions>()
+    .BindConfiguration(JwtOptions.SectionName)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??throw new InvalidOperationException("ConnectionStrings:DefaultConnection is not configured.");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddDataProtection();
