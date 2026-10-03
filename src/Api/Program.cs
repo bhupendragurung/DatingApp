@@ -13,6 +13,7 @@ using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Domain.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, services, configuration) => configuration
@@ -56,6 +57,9 @@ builder.Services
             RoleClaimType = "role"
         };
     });
+    builder.Services.AddAuthorizationBuilder()
+    .AddPolicy(Policies.RequireAdmin, policy => policy.RequireRole(Roles.Admin))
+    .AddPolicy(Policies.RequireModerator, policy => policy.RequireRole(Roles.Admin, Roles.Moderator));
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 builder.Services.AddOptions<JwtOptions>()
     .BindConfiguration(JwtOptions.SectionName)
