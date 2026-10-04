@@ -107,7 +107,6 @@ Each phase is one or more small branches and ends with a demo.
 - Git history shows small, reviewable changes per slice.
 
 ## 9. Risks and open decisions
-- **Local environment:** the .NET 10 compiler does not run on the current Windows build (10.0.21996). Options are upgrading Windows or building in Docker.
 - **Photo cropping:** Azure Blob Storage has no face-aware crop, so choose client-side, server-side center-crop or none.
 - **Auth transport:** JWT bearer is the default; httpOnly cookies are safer against XSS but complicate the SignalR handshake.
 - **Presence scaling:** in-memory presence works on one instance only; adopt Azure SignalR Service if scaling out.
