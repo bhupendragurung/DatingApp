@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Domain.Auth;
+using Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, services, configuration) => configuration
@@ -65,7 +66,6 @@ builder.Services.AddOptions<JwtOptions>()
     .BindConfiguration(JwtOptions.SectionName)
     .ValidateDataAnnotations()
     .ValidateOnStart();
-    builder.Services.AddSingleton<TokenService>();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??throw new InvalidOperationException("ConnectionStrings:DefaultConnection is not configured.");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddDataProtection();
@@ -74,7 +74,8 @@ builder.Services
     .AddRoles<AppRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
- builder.Services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
+builder.Services.AddScoped<Seeder>();
+builder.Services.AddHealthChecks().AddDbContextCheck<AppDbContext>();
 var app = builder.Build();
 
 app.UseSerilogRequestLogging();
@@ -82,6 +83,12 @@ app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    var seedPassword = app.Configuration["Seed:Password"]
+        ?? throw new InvalidOperationException("Seed:Password is not configured.");
+
+    using var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
+    await seeder.SeedUsersAsync(seedPassword, app.Lifetime.ApplicationStopping);
 }
 app.UseAuthentication();
 app.UseAuthorization();

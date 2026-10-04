@@ -1,0 +1,29 @@
+[
+  {
+    "userName": "admin",
+    "knownAs": "Admin",
+    "gender": "male",
+    "dateOfBirth": "1990-01-01",
+    "city": "London",
+    "country": "United Kingdom",
+    "roles": [ "Admin" ]
+  },
+  {
+    "userName": "lisa",
+    "knownAs": "Lisa",
+    "gender": "female",
+    "dateOfBirth": "1995-04-12",
+    "city": "Manchester",
+    "country": "United Kingdom",
+    "roles": [ "Member", "Moderator" ]
+  },
+  {
+    "userName": "tom",
+    "knownAs": "Tom",
+    "gender": "male",
+    "dateOfBirth": "1993-08-30",
+    "city": "Leeds",
+    "country": "United Kingdom",
+    "roles": [ "Member" ]
+  }
+]

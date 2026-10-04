@@ -14,5 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Update="Seed\users.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
