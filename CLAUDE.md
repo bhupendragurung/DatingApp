@@ -27,7 +27,7 @@ Pin exact versions in this file when each piece is scaffolded.
 - Still to add: run client, test, seed.
 - Add migration: `dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Api`
 - Apply migrations: `dotnet ef database update --project src/Infrastructure --startup-project src/Api`
-- Environment note: currently on .NET 9 (`global.json`, `UseAppHost=false`) because the dev machine's Windows build (10.0.21996) can't run .NET 10 tooling (Docker Desktop works). Revert to .NET 10 after upgrading Windows.
+
 
 ## Workflow (important)
 - Work in small slices. Write a short plan for the slice, then implement only that.
