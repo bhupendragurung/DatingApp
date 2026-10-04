@@ -119,3 +119,31 @@ Content-Type: application/json
   "userName": "",
   "password": ""
 }
+### 11. Login as bob and keep the token for the requests below
+# @name loginBob
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "userName": "bob",
+  "password": "Pa$$w0rd"
+}
+
+### 12. No token → 401
+GET {{baseUrl}}/api/auth-check
+
+### 13. Garbage token → 401
+GET {{baseUrl}}/api/auth-check
+Authorization: Bearer not-a-real-token
+
+### 14. Valid Member token → 200 with userName "bob" and roles ["Member"]
+GET {{baseUrl}}/api/auth-check
+Authorization: Bearer {{loginBob.response.body.token}}
+
+### 15. Member on moderator endpoint → 403
+GET {{baseUrl}}/api/auth-check/moderator
+Authorization: Bearer {{loginBob.response.body.token}}
+
+### 16. Member on admin endpoint → 403
+GET {{baseUrl}}/api/auth-check/admin
+Authorization: Bearer {{loginBob.response.body.token}}
