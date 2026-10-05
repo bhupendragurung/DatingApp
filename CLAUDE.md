@@ -7,7 +7,7 @@ Pin exact versions in this file when each piece is scaffolded.
 - Backend: .NET 10 Web API, EF Core, ASP.NET Core Identity + JWT bearer, Mediator 3.0.2 (source-generated), FluentValidation 12.1.1
 - Database: PostgreSQL (Azure Database for PostgreSQL in prod)
 - Real-time: SignalR (presence + chat hubs)
-- Frontend: React + TypeScript, Vite, React Router, TanStack Query, Vitest
+- Frontend: React 19.3.0 + TypeScript 6.0.3, Vite 8.3.2, React Router 8.4.0 (data router), Vitest 5.0.3 +   Testing Library 16.3.3 (jsdom), ESLint 10.12.0, Node 24 LTS. TanStack Query added in a later slice.
 - Photos: Azure Blob Storage
 - Hosting: Azure App Service (API serves the built SPA, with SPA fallback routing)
 
@@ -24,7 +24,11 @@ Pin exact versions in this file when each piece is scaffolded.
 - Run API: `dotnet run --project src/Api` (health check at `/health`)
 - Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
 - Try the API: run it, then open `requests/*.http` (VS Code REST Client) and send requests.
-- Still to add: run client, test, seed.
+- Test API: `dotnet test`
+- Run client: `cd client`, then `npm run dev` (http://localhost:5173)
+- Test client: `cd client`, then `npm test` (watch mode; `npm test -- --run` runs once)
+- Lint/build client: `cd client`, then `npm run lint` / `npm run build`
+- Seed data: runs automatically on API startup in Development.
 - Add migration: `dotnet ef migrations add <Name> --project src/Infrastructure --startup-project src/Api`
 - Apply migrations: `dotnet ef database update --project src/Infrastructure --startup-project src/Api`
 
