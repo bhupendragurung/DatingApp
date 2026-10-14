@@ -6,6 +6,7 @@ export default function Layout() {
       <header className="navbar">
         <Link to="/" className="brand">Dating App</Link>
         <NavLink to="/" end>Home</NavLink>
+        <NavLink to="/login">Log in</NavLink>
       </header>
       <main>
         <Outlet />
