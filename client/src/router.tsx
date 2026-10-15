@@ -4,7 +4,8 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import LoginPage from './pages/LoginPage'
 import { loginAction } from './auth/loginAction'
-
+import RegisterPage from './pages/RegisterPage'
+import { registerAction } from './auth/registerAction'
 export const routes: RouteObject[] = [
   {
     path: '/',
@@ -13,6 +14,7 @@ export const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       { path: '*', element: <NotFoundPage /> },
       { path: 'login', element: <LoginPage />, action: loginAction },
+      { path: 'register', element: <RegisterPage />, action: registerAction },
     ],
   },
 ]
