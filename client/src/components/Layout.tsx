@@ -7,6 +7,7 @@ export default function Layout() {
         <Link to="/" className="brand">Dating App</Link>
         <NavLink to="/" end>Home</NavLink>
         <NavLink to="/login">Log in</NavLink>
+        <NavLink to="/register">Register</NavLink>
       </header>
       <main>
         <Outlet />

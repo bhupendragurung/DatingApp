@@ -9,9 +9,9 @@ export default function LoginPage() {
   const submitting = useNavigation().state === 'submitting'
 
   return (
-    <>
-      <h1>Log in</h1>
-      <Form method="post">
+   
+      <Form method="post"  className="form">
+        <h1>Log in</h1>
         <label>
           Username
           <input name="userName" autoComplete="username" required />
@@ -25,6 +25,6 @@ export default function LoginPage() {
           {submitting ? 'Logging in…' : 'Log in'}
         </button>
       </Form>
-    </>
+    
   )
 }
