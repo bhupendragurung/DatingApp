@@ -8,15 +8,21 @@ import RegisterPage from './pages/RegisterPage'
 import { registerAction } from './auth/registerAction'
 import MembersPage from './pages/MembersPage'
 import { requireAuth } from './auth/guards'
+import { rootLoader } from './auth/rootLoader'
+import { logoutAction } from './auth/logoutAction'
 export const routes: RouteObject[] = [
   {
+    id: 'root',
     path: '/',
     element: <Layout />,
+    loader: rootLoader,
+    hydrateFallbackElement: <p>Loading…</p>,
     children: [
       { index: true, element: <HomePage /> },
       { path: '*', element: <NotFoundPage /> },
       { path: 'login', element: <LoginPage />, action: loginAction },
       { path: 'register', element: <RegisterPage />, action: registerAction },
+      { path: 'logout', action: logoutAction },
         {
         loader: requireAuth,
         children: [

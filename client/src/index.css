@@ -87,3 +87,12 @@ main {
   color: #d33;
   font-size: 0.85rem;
 }
+.navbar button {
+  font: inherit;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #8886;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
