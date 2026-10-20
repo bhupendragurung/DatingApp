@@ -21,7 +21,7 @@ export async function loginAction({ request }: ActionFunctionArgs) {
 
 // Only allow paths inside this app. Blocks open redirects like
 // /login?redirectTo=https://evil.com or //evil.com.
-function safeRedirect(to: string | null): string {
-  if (!to || !to.startsWith('/') || to.startsWith('//')) return '/'
+export function safeRedirect(to: string | null): string {
+  if (!to || !to.startsWith('/') || to.startsWith('//') || to.startsWith('/\\')) return '/'
   return to
 }
