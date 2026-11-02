@@ -1,10 +1,11 @@
-import {Form, Link, NavLink, Outlet, useLoaderData } from 'react-router'
+import {Form, Link, NavLink, Outlet, useLoaderData, useNavigation } from 'react-router'
 import type { rootLoader } from '../auth/rootLoader'
 export default function Layout() {
   const { userName } = useLoaderData<typeof rootLoader>()
-
+  const busy = useNavigation().state !== 'idle'
   return (
     <>
+      {busy && <div className="loading-bar" role="progressbar" aria-label="Loading" />}
       <header className="navbar">
         <Link to="/" className="brand">Dating App</Link>
         <NavLink to="/" end>Home</NavLink>
