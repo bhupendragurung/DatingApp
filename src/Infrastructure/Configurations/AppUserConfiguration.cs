@@ -12,5 +12,8 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
         builder.Property(u => u.Gender).HasMaxLength(20);
         builder.Property(u => u.City).HasMaxLength(100);
         builder.Property(u => u.Country).HasMaxLength(100);
+        builder.Property(u => u.Introduction).HasMaxLength(2000);  
+        builder.Property(u => u.LookingFor).HasMaxLength(2000);
+        builder.Property(u => u.Interests).HasMaxLength(500);  
     }
 }
