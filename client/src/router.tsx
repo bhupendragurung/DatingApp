@@ -10,6 +10,7 @@ import MembersPage from './pages/MembersPage'
 import { requireAuth } from './auth/guards'
 import { rootLoader } from './auth/rootLoader'
 import { logoutAction } from './auth/logoutAction'
+import ErrorPage from './pages/ErrorPage'
 export const routes: RouteObject[] = [
   {
     id: 'root',
@@ -18,15 +19,18 @@ export const routes: RouteObject[] = [
     loader: rootLoader,
     hydrateFallbackElement: <p>Loading…</p>,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: '*', element: <NotFoundPage /> },
-      { path: 'login', element: <LoginPage />, action: loginAction },
-      { path: 'register', element: <RegisterPage />, action: registerAction },
-      { path: 'logout', action: logoutAction },
-        {
-        loader: requireAuth,
+      {
+        errorElement: <ErrorPage />,
         children: [
-          { path: 'members', element: <MembersPage /> },
+          { index: true, element: <HomePage /> },
+          { path: '*', element: <NotFoundPage /> },
+          { path: 'login', element: <LoginPage />, action: loginAction },
+          { path: 'register', element: <RegisterPage />, action: registerAction },
+          { path: 'logout', action: logoutAction },
+          {
+            loader: requireAuth,
+            children: [{ path: 'members', element: <MembersPage /> }],
+          },
         ],
       },
     ],
