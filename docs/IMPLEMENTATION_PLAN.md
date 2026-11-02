@@ -31,7 +31,7 @@ Demo: register, log in, call a protected endpoint with the token; a Member gets 
 Goal: a usable React app you can sign in to and browse members.
 - [x] P2.1 `feature/client-scaffold`: Vite + React + TypeScript, routing, layout, Vitest
 - [x] P2.2 `feature/client-auth`: register and login pages, token storage, route guards, request client that attaches the token
-- [ ] P2.3 `feature/client-feedback`: global loading indicator and central HTTP error handling
+- [x] P2.3 `feature/client-feedback`: global loading indicator and central HTTP error handling
 - [ ] P2.4 `feature/member-fields`: profile fields on the user (introduction, looking-for, interests, city, country), migration, more seed members
 - [ ] P2.5 `feature/members-list-api`: paginated list with gender/age filters, sort, opposite-gender default
 - [ ] P2.6 `feature/members-list-ui`: member cards, filter form, pagination
