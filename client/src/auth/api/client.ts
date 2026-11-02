@@ -1,5 +1,5 @@
-import { getToken } from '../tokenStorage'
-
+import { redirect } from 'react-router'
+import { clearToken, getToken } from '../tokenStorage'
 export type ProblemDetails = {
   title?: string
   status?: number
@@ -29,6 +29,12 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
   const response = await fetch(`/api${path}`, { ...init, headers })
 
   if (!response.ok) {
+     // The server rejected the token we sent (bad signature, changed secret,
+    // expired in flight). Log out and send the user to the login page.
+    if (response.status === 401 && token) {
+      clearToken()
+      throw redirect('/login')
+    }
     // A 401 from JWT bearer has an empty body, so fall back to {}.
     const problem = (await response.json().catch(() => ({}))) as ProblemDetails
     throw new ApiError(response.status, problem)
