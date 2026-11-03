@@ -15,6 +15,9 @@
     "dateOfBirth": "1995-04-12",
     "city": "Manchester",
     "country": "United Kingdom",
+    "introduction": "Nurse by day, amateur baker by night. I make a lemon drizzle that has ended arguments.",
+    "lookingFor": "Someone kind and curious who is up for weekend trips and long dinners.",
+    "interests": "baking, hiking, live music",
     "roles": [ "Member", "Moderator" ]
   },
   {
@@ -24,6 +27,105 @@
     "dateOfBirth": "1993-08-30",
     "city": "Leeds",
     "country": "United Kingdom",
+    "introduction": "Software developer who spends too much time choosing coffee beans.",
+    "lookingFor": "A partner in crime for board game nights and spontaneous road trips.",
+    "interests": "board games, coffee, cycling",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "emma",
+    "knownAs": "Emma",
+    "gender": "female",
+    "dateOfBirth": "1998-02-14",
+    "city": "Bristol",
+    "country": "United Kingdom",
+    "introduction": "Graphic designer with a soft spot for old bookshops and older films.",
+    "lookingFor": "Someone who can make me laugh and doesn't mind a cinema date every week.",
+    "interests": "films, design, reading",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "sophie",
+    "knownAs": "Sophie",
+    "gender": "female",
+    "dateOfBirth": "2001-07-03",
+    "city": "Edinburgh",
+    "country": "United Kingdom",
+    "introduction": "Finishing my master's in marine biology. Happiest near the sea.",
+    "lookingFor": "An adventurous soul who likes cold swims and warm pubs.",
+    "interests": "swimming, wildlife, photography",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "olivia",
+    "knownAs": "Olivia",
+    "gender": "female",
+    "dateOfBirth": "1988-11-21",
+    "city": "Cardiff",
+    "country": "United Kingdom",
+    "introduction": "Teacher, runner and proud owner of a very lazy cat.",
+    "lookingFor": "Someone settled, honest and ready for something serious.",
+    "interests": "running, gardening, cooking",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "grace",
+    "knownAs": "Grace",
+    "gender": "female",
+    "dateOfBirth": "2005-05-09",
+    "city": "Liverpool",
+    "country": "United Kingdom",
+    "introduction": "Music student. I play bass and I will talk about it if you let me.",
+    "lookingFor": "Someone to go to gigs with and see where it goes.",
+    "interests": "music, gigs, vintage clothes",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "james",
+    "knownAs": "James",
+    "gender": "male",
+    "dateOfBirth": "1997-03-18",
+    "city": "Birmingham",
+    "country": "United Kingdom",
+    "introduction": "Physio and five-a-side regular. I cook a decent curry.",
+    "lookingFor": "Someone active who also enjoys a lazy Sunday.",
+    "interests": "football, cooking, travel",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "daniel",
+    "knownAs": "Daniel",
+    "gender": "male",
+    "dateOfBirth": "1985-09-02",
+    "city": "Glasgow",
+    "country": "United Kingdom",
+    "introduction": "Architect who sketches buildings on every holiday.",
+    "lookingFor": "A thoughtful partner who loves exploring new cities.",
+    "interests": "architecture, sketching, jazz",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "ryan",
+    "knownAs": "Ryan",
+    "gender": "male",
+    "dateOfBirth": "2003-12-11",
+    "city": "Brighton",
+    "country": "United Kingdom",
+    "introduction": "Barista and part-time surfer. Yes, the waves in Brighton count.",
+    "lookingFor": "Someone easy-going who likes the beach in any weather.",
+    "interests": "surfing, coffee, skateboarding",
+    "roles": [ "Member" ]
+  },
+  {
+    "userName": "sam",
+    "knownAs": "Sam",
+    "gender": "male",
+    "dateOfBirth": "1991-06-25",
+    "city": "Belfast",
+    "country": "United Kingdom",
+    "introduction": "Chef at a small bistro. I'll cook, you choose the wine.",
+    "lookingFor": "Someone who loves food as much as I do.",
+    "interests": "food, wine, hiking",
     "roles": [ "Member" ]
   }
 ]

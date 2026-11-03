@@ -28,7 +28,10 @@ public sealed class Seeder(UserManager<AppUser> userManager, AppDbContext db, IL
                 Gender = seed.Gender,
                 DateOfBirth = seed.DateOfBirth,
                 City = seed.City,
-                Country = seed.Country
+                Country = seed.Country,
+                Introduction = seed.Introduction,
+                LookingFor = seed.LookingFor,
+                Interests = seed.Interests
             };
 
             await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);

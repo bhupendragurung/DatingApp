@@ -7,4 +7,7 @@ public sealed record SeedUser(
     DateOnly DateOfBirth,
     string City,
     string Country,
+    string? Introduction,
+    string? LookingFor,
+    string? Interests,
     string[] Roles);
