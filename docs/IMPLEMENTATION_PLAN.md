@@ -33,7 +33,7 @@ Goal: a usable React app you can sign in to and browse members.
 - [x] P2.2 `feature/client-auth`: register and login pages, token storage, route guards, request client that attaches the token
 - [x] P2.3 `feature/client-feedback`: global loading indicator and central HTTP error handling
 - [x] P2.4 `feature/member-fields`: profile fields on the user (introduction, looking-for, interests, city, country), migration, more seed members
-- [ ] P2.5 `feature/members-list-api`: paginated list with gender/age filters, sort, opposite-gender default
+- [x] P2.5 `feature/members-list-api`: paginated list with gender/age filters, sort, opposite-gender default
 - [ ] P2.6 `feature/members-list-ui`: member cards, filter form, pagination
 - [ ] P2.7 `feature/member-detail`: single profile endpoint and page
 - [ ] P2.8 `feature/profile-edit`: edit own profile endpoint and form, unsaved-changes warning
