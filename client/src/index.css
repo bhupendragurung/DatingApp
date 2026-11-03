@@ -113,3 +113,38 @@ main {
   from { background-position: -100% 0; }
   to   { background-position: 200% 0; }
 }
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.member-card {
+  padding: 1rem;
+  border: 1px solid #8884;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.member-card h2 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.member-card p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e0457b;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
