@@ -11,6 +11,7 @@ import { requireAuth } from './auth/guards'
 import { rootLoader } from './auth/rootLoader'
 import { logoutAction } from './auth/logoutAction'
 import ErrorPage from './pages/ErrorPage'
+import { membersLoader } from './members/membersLoader'
 export const routes: RouteObject[] = [
   {
     id: 'root',
@@ -29,7 +30,7 @@ export const routes: RouteObject[] = [
           { path: 'logout', action: logoutAction },
           {
             loader: requireAuth,
-            children: [{ path: 'members', element: <MembersPage /> }],
+            children: [{ path: 'members', element: <MembersPage />, loader: membersLoader }],
           },
         ],
       },

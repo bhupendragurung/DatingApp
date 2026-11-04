@@ -113,3 +113,85 @@ main {
   from { background-position: -100% 0; }
   to   { background-position: 200% 0; }
 }
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.member-card {
+  padding: 1rem;
+  border: 1px solid #8884;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.member-card h2 {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.1rem;
+}
+
+.member-card p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e0457b;
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.filter-form input,
+.filter-form select,
+.filter-form button {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #8886;
+  border-radius: 6px;
+}
+
+.filter-form input {
+  width: 6rem;
+}
+
+.filter-form button {
+  border: none;
+  background: #e0457b;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.pagination .disabled {
+  opacity: 0.4;
+}
