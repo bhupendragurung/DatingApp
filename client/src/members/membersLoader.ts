@@ -11,6 +11,7 @@ function filtersFromUrl(params: URLSearchParams): MemberFilters {
   const orderBy = params.get('orderBy')
   return {
     page: toNumber(params.get('page')),
+    pageSize: toNumber(params.get('pageSize')),
     minAge: toNumber(params.get('minAge')),
     maxAge: toNumber(params.get('maxAge')),
     gender: gender === 'male' || gender === 'female' ? gender : undefined,

@@ -3,8 +3,9 @@ import { useLoaderData } from 'react-router'
 import MemberCard from '../members/MemberCard'
 import type { membersLoader } from '../members/membersLoader'
 import MemberFilterForm from '../members/MemberFilterForm'
+import Pagination from '../members/Pagination'
 export default function MembersPage() {
-  const { items, totalCount } = useLoaderData<typeof membersLoader>()
+  const { items, totalCount, page, totalPages } = useLoaderData<typeof membersLoader>()
 
   return (
     <section>
@@ -20,6 +21,7 @@ export default function MembersPage() {
           ))}
         </div>
       )}
+       <Pagination page={page} totalPages={totalPages} />
     </section>
   )
 }
