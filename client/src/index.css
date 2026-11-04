@@ -148,3 +148,39 @@ main {
   font-size: 2rem;
   font-weight: 700;
 }
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.filter-form input,
+.filter-form select,
+.filter-form button {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #8886;
+  border-radius: 6px;
+}
+
+.filter-form input {
+  width: 6rem;
+}
+
+.filter-form button {
+  border: none;
+  background: #e0457b;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
