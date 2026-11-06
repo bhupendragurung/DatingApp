@@ -37,3 +37,19 @@ Authorization: Bearer {{loginTom.response.body.token}}
 ### 8. Bad input → 400 with errors for Page, PageSize, Gender, MaxAge, OrderBy
 GET {{baseUrl}}/api/members?page=0&pageSize=500&gender=fale&minAge=40&maxAge=30&orderBy=random
 Authorization: Bearer {{loginTom.response.body.token}}
+
+### 3. Defaults → 200, page 1, only females (opposite of tom), newest first, tom not in list
+# @name members
+GET {{baseUrl}}/api/members
+Authorization: Bearer {{loginTom.response.body.token}}
+### 9. Member detail → 200, first member from request 3 with introduction/lookingFor/interests
+GET {{baseUrl}}/api/members/{{members.response.body.$.items[0].id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 10. Unknown id → 404 ProblemDetails with code "Members.NotFound"
+GET {{baseUrl}}/api/members/00000000-0000-0000-0000-000000000001
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 11. Not a guid → 404 (route constraint, never reaches the handler)
+GET {{baseUrl}}/api/members/abc
+Authorization: Bearer {{loginTom.response.body.token}}
