@@ -9,7 +9,12 @@ export type Member = {
   city: string
   country: string
 }
-
+export type MemberDetail = Member & {
+  createdAt: string
+  introduction: string | null
+  lookingFor: string | null
+  interests: string | null
+}
 export type PagedResult<T> = {
   items: T[]
   page: number
@@ -35,4 +40,7 @@ export function getMembers(filters: MemberFilters = {}): Promise<PagedResult<Mem
   }
   const query = params.toString()
   return apiFetch<PagedResult<Member>>(query ? `/members?${query}` : '/members')
+}
+export function getMember(id: string): Promise<MemberDetail> {
+  return apiFetch<MemberDetail>(`/members/${encodeURIComponent(id)}`)
 }

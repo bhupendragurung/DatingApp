@@ -12,6 +12,9 @@ import { rootLoader } from './auth/rootLoader'
 import { logoutAction } from './auth/logoutAction'
 import ErrorPage from './pages/ErrorPage'
 import { membersLoader } from './members/membersLoader'
+import MemberDetailPage from './pages/MemberDetailPage'
+import { memberDetailLoader } from './members/memberDetailLoader'
+
 export const routes: RouteObject[] = [
   {
     id: 'root',
@@ -30,7 +33,10 @@ export const routes: RouteObject[] = [
           { path: 'logout', action: logoutAction },
           {
             loader: requireAuth,
-            children: [{ path: 'members', element: <MembersPage />, loader: membersLoader }],
+            children: [
+              { path: 'members', element: <MembersPage />, loader: membersLoader },
+              { path: 'members/:id', element: <MemberDetailPage />, loader: memberDetailLoader },
+            ],
           },
         ],
       },
