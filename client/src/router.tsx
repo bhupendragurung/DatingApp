@@ -14,7 +14,9 @@ import ErrorPage from './pages/ErrorPage'
 import { membersLoader } from './members/membersLoader'
 import MemberDetailPage from './pages/MemberDetailPage'
 import { memberDetailLoader } from './members/memberDetailLoader'
-
+import EditProfilePage from './pages/EditProfilePage'
+import { editProfileLoader } from './members/editProfileLoader'
+import { editProfileAction } from './members/editProfileAction'
 export const routes: RouteObject[] = [
   {
     id: 'root',
@@ -36,6 +38,7 @@ export const routes: RouteObject[] = [
             children: [
               { path: 'members', element: <MembersPage />, loader: membersLoader },
               { path: 'members/:id', element: <MemberDetailPage />, loader: memberDetailLoader },
+              { path: 'profile/edit', element: <EditProfilePage />, loader: editProfileLoader, action: editProfileAction },
             ],
           },
         ],

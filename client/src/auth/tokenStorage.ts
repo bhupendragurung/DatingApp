@@ -23,7 +23,12 @@ export function getUserName(): string | null {
   const name = readPayload(token)?.unique_name
   return typeof name === 'string' ? name : null
 }
-
+export function getUserId(): string | null {
+  const token = getToken()
+  if (!token) return null
+  const id = readPayload(token)?.sub
+  return typeof id === 'string' ? id : null
+}
 function isExpired(token: string): boolean {
   const exp = readPayload(token)?.exp
   return typeof exp !== 'number' || exp * 1000 <= Date.now()

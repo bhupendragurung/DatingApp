@@ -44,3 +44,16 @@ export function getMembers(filters: MemberFilters = {}): Promise<PagedResult<Mem
 export function getMember(id: string): Promise<MemberDetail> {
   return apiFetch<MemberDetail>(`/members/${encodeURIComponent(id)}`)
 }
+export type UpdateProfileRequest = {
+  city: string
+  country: string
+  introduction: string | null
+  lookingFor: string | null
+  interests: string | null
+}
+export function updateProfile(data: UpdateProfileRequest): Promise<void> {
+  return apiFetch<void>('/members', {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  })
+}
