@@ -61,6 +61,7 @@ main {
 
 .form input,
 .form select,
+.form textarea,
 .form button {
   font: inherit;
   padding: 0.5rem 0.75rem;
@@ -86,6 +87,29 @@ main {
   margin: -0.5rem 0 0;
   color: #d33;
   font-size: 0.85rem;
+}
+.form textarea {
+  resize: vertical;
+}
+.form-wide {
+  max-width: 560px;
+}
+.unsaved-warning {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0a800;
+  border-radius: 6px;
+  background: #e0a80022;
+}
+
+.unsaved-warning p {
+  margin: 0 0 0.5rem;
+}
+
+.unsaved-warning button + button {
+  margin-left: 0.5rem;
+  background: transparent;
+  border: 1px solid #8886;
+  color: inherit;
 }
 .navbar button {
   font: inherit;
