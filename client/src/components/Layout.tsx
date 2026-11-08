@@ -12,6 +12,7 @@ export default function Layout() {
         {userName ? (
           <>
             <NavLink to="/members">Members</NavLink>
+            <NavLink to="/profile/edit">Edit profile</NavLink>
             <span>Hi, {userName}</span>
              <Form method="post" action="/logout">
               <button type="submit">Log out</button>

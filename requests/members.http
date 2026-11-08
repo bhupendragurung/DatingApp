@@ -53,3 +53,38 @@ Authorization: Bearer {{loginTom.response.body.token}}
 ### 11. Not a guid → 404 (route constraint, never reaches the handler)
 GET {{baseUrl}}/api/members/abc
 Authorization: Bearer {{loginTom.response.body.token}}
+### 12. Update own profile → 204 No Content
+PUT {{baseUrl}}/api/members
+Authorization: Bearer {{loginTom.response.body.token}}
+Content-Type: application/json
+
+{
+  "city": "  Kathmandu ",
+  "country": "Nepal",
+  "introduction": "Hi, I'm tom. Updated from the .http file.",
+  "lookingFor": "   ",
+  "interests": "Hiking, coffee"
+}
+
+### 13. Check it saved → 200, city "Kathmandu" (trimmed), lookingFor null (blank → null)
+GET {{baseUrl}}/api/members/{{loginTom.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 14. Bad input → 400 with errors for City and Country
+PUT {{baseUrl}}/api/members
+Authorization: Bearer {{loginTom.response.body.token}}
+Content-Type: application/json
+
+{
+  "city": "",
+  "country": "",
+  "introduction": null,
+  "lookingFor": null,
+  "interests": null
+}
+
+### 15. No token → 401
+PUT {{baseUrl}}/api/members
+Content-Type: application/json
+
+{ "city": "X", "country": "Y" }
