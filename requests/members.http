@@ -88,3 +88,7 @@ PUT {{baseUrl}}/api/members
 Content-Type: application/json
 
 { "city": "X", "country": "Y" }
+
+### 16. Sort by last active → 200, tom's latest activity first; every item has lastActive
+GET {{baseUrl}}/api/members?gender=male&orderBy=lastActive
+Authorization: Bearer {{loginTom.response.body.$.token}}

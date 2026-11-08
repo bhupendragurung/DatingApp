@@ -22,7 +22,7 @@ public sealed class GetMembersQueryValidator : AbstractValidator<GetMembersQuery
             .WithMessage("MaxAge must be between MinAge and 120.");
 
         RuleFor(x => x.OrderBy)
-            .Must(o => o is "newest" or "name")
-            .WithMessage("OrderBy must be 'newest' or 'name'.");
+            .Must(o => o is "newest" or "name" or "lastActive")
+            .WithMessage("OrderBy must be 'newest', 'name' or 'lastActive'.");
     }
 }
