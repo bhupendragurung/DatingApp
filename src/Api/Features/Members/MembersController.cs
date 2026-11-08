@@ -3,6 +3,7 @@ using Api.Common.Auth;
 using Api.Common.Paging;
 using Api.Features.Members.GetMemberById;
 using Api.Features.Members.GetMembers;
+using Api.Features.Members.UpdateProfile;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,4 +46,21 @@ public sealed class MembersController(ISender sender) : ControllerBase
             ? Ok(result.Value)
             : this.ToProblem(result.Error);
     }
+
+   [HttpPut]
+[ProducesResponseType(StatusCodes.Status204NoContent)]
+[ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+public async Task<ActionResult> UpdateProfile(
+    [FromBody] UpdateProfileCommand command,
+    CancellationToken cancellationToken)
+{
+    var result = await sender.Send(
+        command with { UserId = User.GetUserId() },
+        cancellationToken);
+
+    return result.IsSuccess
+        ? NoContent()
+        : this.ToProblem(result.Error);
+}
 }
