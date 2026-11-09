@@ -8,6 +8,7 @@ export type Member = {
   gender: string
   city: string
   country: string
+  lastActive: string
 }
 export type MemberDetail = Member & {
   createdAt: string
@@ -29,7 +30,7 @@ export type MemberFilters = {
   gender?: 'male' | 'female'
   minAge?: number
   maxAge?: number
-  orderBy?: 'newest' | 'name'
+  orderBy?: 'newest' | 'name' | 'lastActive'
 }
 
 export function getMembers(filters: MemberFilters = {}): Promise<PagedResult<Member>> {

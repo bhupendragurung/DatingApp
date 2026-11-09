@@ -44,6 +44,7 @@ export default function MemberFilterForm() {
         <select name="orderBy" defaultValue={searchParams.get('orderBy') ?? 'newest'}>
           <option value="newest">Newest members</option>
           <option value="name">Name (A–Z)</option>
+           <option value="lastActive">Recently active</option>
         </select>
       </label>
 

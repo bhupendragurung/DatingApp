@@ -15,8 +15,10 @@ function filtersFromUrl(params: URLSearchParams): MemberFilters {
     minAge: toNumber(params.get('minAge')),
     maxAge: toNumber(params.get('maxAge')),
     gender: gender === 'male' || gender === 'female' ? gender : undefined,
-    orderBy: orderBy === 'newest' || orderBy === 'name' ? orderBy : undefined,
-  }
+    orderBy: orderBy === 'newest' || orderBy === 'name' || orderBy === 'lastActive'
+        ? orderBy
+        : undefined,  
+      }
 }
 
 export function membersLoader({ request }: LoaderFunctionArgs) {

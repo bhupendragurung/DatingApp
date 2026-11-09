@@ -46,6 +46,7 @@ public sealed class GetMembersHandler(AppDbContext db, TimeProvider timeProvider
         members = query.OrderBy switch
         {
             "name" => members.OrderBy(u => u.KnownAs).ThenBy(u => u.Id),
+            "lastActive" => members.OrderByDescending(u => u.LastActive).ThenBy(u => u.Id),
             _ => members.OrderByDescending(u => u.CreatedAt).ThenBy(u => u.Id)
         };
 
@@ -57,7 +58,8 @@ public sealed class GetMembersHandler(AppDbContext db, TimeProvider timeProvider
                 u.DateOfBirth.CalculateAge(today),
                 u.Gender,
                 u.City,
-                u.Country))
+                u.Country,
+                u.LastActive))
             .ToPagedResultAsync(query.Page, query.PageSize, cancellationToken);
 
         return Result<PagedResult<MemberDto>>.Success(page);

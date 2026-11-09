@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import type { Member } from './api/members'
-
+import { timeAgo } from './timeAgo'
 type Props = { member: Member }
 
 export default function MemberCard({ member }: Props) {
@@ -16,6 +16,7 @@ export default function MemberCard({ member }: Props) {
         <p>
           {member.city}, {member.country}
         </p>
+         <p className="last-active">Active {timeAgo(member.lastActive)}</p>
       </article>
     </Link>
   )

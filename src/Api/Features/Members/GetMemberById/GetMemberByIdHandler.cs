@@ -30,6 +30,7 @@ public sealed class GetMemberByIdHandler(AppDbContext db, TimeProvider timeProvi
                 u.City,
                 u.Country,
                 u.CreatedAt,
+                u.LastActive,
                 u.Introduction,
                 u.LookingFor,
                 u.Interests))

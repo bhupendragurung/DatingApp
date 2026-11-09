@@ -7,4 +7,6 @@ public sealed record MemberDto(
     int Age,
     string Gender,
     string City,
-    string Country);
+    string Country,
+    DateTime LastActive
+    );

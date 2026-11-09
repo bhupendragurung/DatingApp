@@ -1,6 +1,6 @@
 import { Link, useLoaderData } from 'react-router'
 import type { memberDetailLoader } from '../members/memberDetailLoader'
-
+import { timeAgo } from '../members/timeAgo'
 export default function MemberDetailPage() {
   const member = useLoaderData<typeof memberDetailLoader>()
   const memberSince = new Date(member.createdAt).toLocaleDateString(undefined, {
@@ -23,6 +23,7 @@ export default function MemberDetailPage() {
           <p>
             {member.city}, {member.country} · Member since {memberSince}
           </p>
+            <p className="last-active">Active {timeAgo(member.lastActive)}</p>
         </div>
       </header>
 

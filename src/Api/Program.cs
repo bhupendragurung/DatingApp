@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Domain.Auth;
 using Infrastructure.Seed;
+using Api.Common.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, services, configuration) => configuration
@@ -92,7 +93,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<LastActiveMiddleware>();
 app.MapControllers();
 app.MapHealthChecks("/health");
 app.Run();

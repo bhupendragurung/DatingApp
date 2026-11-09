@@ -9,6 +9,7 @@ public sealed record MemberDetailDto(
     string City,
     string Country,
     DateTime CreatedAt,
+    DateTime LastActive,
     string? Introduction,
     string? LookingFor,
     string? Interests);
