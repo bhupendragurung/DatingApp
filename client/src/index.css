@@ -263,3 +263,7 @@ main {
 .member-card-link:focus-visible .member-card {
   border-color: #e0457b;
 }
+.last-active {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
