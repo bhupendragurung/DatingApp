@@ -44,7 +44,7 @@ Demo: register in the browser, browse and filter members, view and edit your pro
 
 ## Phase 3: Photos
 Goal: upload and manage photos.
-- [ ] P3.1 `feature/photo-model`: photo entity and migration
+- [x] P3.1 `feature/photo-model`: photo entity and migration
 - [ ] P3.2 `feature/blob-storage`: Azure Blob Storage service (Azurite locally)
 - [ ] P3.3 `feature/photo-upload`: upload endpoint, first photo becomes main
 - [ ] P3.4 `feature/photo-main-delete`: set main, delete non-main, remove from storage
