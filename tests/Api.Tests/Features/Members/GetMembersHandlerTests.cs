@@ -42,7 +42,7 @@ public sealed class GetMembersHandlerTests
             CreateUser("Karen", "female"),
             CreateUser("Bob", "male"));
         await db.SaveChangesAsync();
-  var query = new GetMembersQuery { CurrentUserId = currentUser.Id };
+         var query = new GetMembersQuery { CurrentUserId = currentUser.Id };
         var result = await CreateHandler(db).Handle(query, CancellationToken.None);
 
         Assert.True(result.IsSuccess);
@@ -50,5 +50,20 @@ public sealed class GetMembersHandlerTests
         Assert.All(result.Value.Items, m => Assert.Equal("female", m.Gender));
     
     }
+[Fact]
+public async Task Handle_ExcludesCurrentUser_WhenTheirOwnGenderIsRequested()
+{
+    await using var db = CreateDb();
+    var currentUser = CreateUser("Tom", "male");
+    db.Users.AddRange(currentUser, CreateUser("Bob", "male"));
+    await db.SaveChangesAsync();
+
+    var query = new GetMembersQuery { CurrentUserId = currentUser.Id, Gender = "male" };
+    var result = await CreateHandler(db).Handle(query, CancellationToken.None);
+
+    Assert.True(result.IsSuccess);
+    var member = Assert.Single(result.Value.Items);
+    Assert.Equal("Bob", member.KnownAs);
+}
 }
 
