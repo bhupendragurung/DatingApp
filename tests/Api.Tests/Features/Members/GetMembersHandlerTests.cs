@@ -65,5 +65,26 @@ public async Task Handle_ExcludesCurrentUser_WhenTheirOwnGenderIsRequested()
     var member = Assert.Single(result.Value.Items);
     Assert.Equal("Bob", member.KnownAs);
 }
+ [Fact]
+public async Task Handle_ReturnsOnlyMembersBetweenMinAgeAndMaxAge()
+    {
+    await using var db = CreateDb();
+    var currentUser = CreateUser("Tom", "male");
+    db.Users.AddRange(
+        currentUser,
+        CreateUser("Amy", "female", age: 24),
+        CreateUser("Beth", "female", age: 25),
+        CreateUser("Cara", "female", age: 30),
+        CreateUser("Dana", "female", age: 31));
+    await db.SaveChangesAsync();
+
+    var query = new GetMembersQuery { CurrentUserId = currentUser.Id, MinAge = 25, MaxAge = 30 };
+    var result = await CreateHandler(db).Handle(query, CancellationToken.None);
+
+    Assert.True(result.IsSuccess);
+    var ages = result.Value.Items.Select(m => m.Age).Order();
+    Assert.Equal(new[] { 25, 30 }, ages);
+}
+    
 }
 
