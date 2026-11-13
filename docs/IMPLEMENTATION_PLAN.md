@@ -38,7 +38,7 @@ Goal: a usable React app you can sign in to and browse members.
 - [x] P2.7 `feature/member-detail`: single profile endpoint and page
 - [x] P2.8 `feature/profile-edit`: edit own profile endpoint and form, unsaved-changes warning
 - [x] P2.9 `feature/last-active`: update last-active on authenticated requests
-- [ ] P2.10 `feature/members-tests`: tests for pagination, filtering and default gender
+- [x] P2.10 `feature/members-tests`: tests for pagination, filtering and default gender
 
 Demo: register in the browser, browse and filter members, view and edit your profile.
 
