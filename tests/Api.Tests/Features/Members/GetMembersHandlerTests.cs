@@ -85,6 +85,33 @@ public async Task Handle_ReturnsOnlyMembersBetweenMinAgeAndMaxAge()
     var ages = result.Value.Items.Select(m => m.Age).Order();
     Assert.Equal(new[] { 25, 30 }, ages);
 }
-    
+    [Fact]
+public async Task Handle_ReturnsRequestedPage_WithTotalsForAllMatches()
+{
+    await using var db = CreateDb();
+    var currentUser = CreateUser("Tom", "male");
+    db.Users.AddRange(
+        currentUser,
+        CreateUser("Dana", "female"),
+        CreateUser("Amy", "female"),
+        CreateUser("Emma", "female"),
+        CreateUser("Cara", "female"),
+        CreateUser("Beth", "female"));
+    await db.SaveChangesAsync();
+
+    var query = new GetMembersQuery
+    {
+        CurrentUserId = currentUser.Id,
+        OrderBy = "name",
+        Page = 2,
+        PageSize = 2
+    };
+    var result = await CreateHandler(db).Handle(query, CancellationToken.None);
+
+    Assert.True(result.IsSuccess);
+    Assert.Equal(new[] { "Cara", "Dana" }, result.Value.Items.Select(m => m.KnownAs));
+    Assert.Equal(5, result.Value.TotalCount);
+    Assert.Equal(3, result.Value.TotalPages);
+}
 }
 
