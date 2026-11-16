@@ -22,7 +22,7 @@ Pin exact versions in this file when each piece is scaffolded.
 ## Commands
 - Build: `dotnet build`
 - Run API: `dotnet run --project src/Api` (health check at `/health`)
-- Start database: `docker compose up -d db` (needs `.env`, copy from `.env.example`)
+- Start database and blob storage: `docker compose up -d ` (needs `.env`, copy from `.env.example`)
 - Try the API: run it, then open `requests/*.http` (VS Code REST Client) and send requests.
 - Test API: `dotnet test`
 - Run client: `cd client`, then `npm run dev` (http://localhost:5173)

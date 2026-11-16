@@ -16,6 +16,9 @@ using Serilog;
 using Domain.Auth;
 using Infrastructure.Seed;
 using Api.Common.Middleware;
+using Infrastructure.Storage;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, services, configuration) => configuration
@@ -67,6 +70,16 @@ builder.Services.AddOptions<JwtOptions>()
     .BindConfiguration(JwtOptions.SectionName)
     .ValidateDataAnnotations()
     .ValidateOnStart();
+builder.Services.AddOptions<BlobStorageOptions>()
+    .BindConfiguration(BlobStorageOptions.SectionName)
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+builder.Services.AddSingleton(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<BlobStorageOptions>>().Value;
+    return new BlobContainerClient(options.ConnectionString, options.ContainerName);
+});
+builder.Services.AddSingleton<IPhotoStorage, BlobPhotoStorage>();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")??throw new InvalidOperationException("ConnectionStrings:DefaultConnection is not configured.");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddDataProtection();
@@ -90,6 +103,10 @@ if (app.Environment.IsDevelopment())
     using var scope = app.Services.CreateScope();
     var seeder = scope.ServiceProvider.GetRequiredService<Seeder>();
     await seeder.SeedUsersAsync(seedPassword, app.Lifetime.ApplicationStopping);
+     var photoContainer = scope.ServiceProvider.GetRequiredService<BlobContainerClient>();
+    await photoContainer.CreateIfNotExistsAsync(
+        PublicAccessType.Blob,
+        cancellationToken: app.Lifetime.ApplicationStopping);
 }
 app.UseAuthentication();
 app.UseAuthorization();
