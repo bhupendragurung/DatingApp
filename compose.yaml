@@ -16,6 +16,15 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
-
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: datingapp-azurite
+    restart: unless-stopped
+    command: azurite-blob --blobHost 0.0.0.0 --location /data --skipApiVersionCheck
+    ports:
+      - "10000:10000"
+    volumes:
+      - azurite-data:/data
 volumes:
   db-data:
+  azurite-data:
