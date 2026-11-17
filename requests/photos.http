@@ -1,0 +1,46 @@
+@baseUrl = http://localhost:5136
+
+### 1. Login as tom and keep the token
+# @name loginTom
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "userName": "tom",
+  "password": "Pa$$w0rd"
+}
+
+### 2. No token → 401
+POST {{baseUrl}}/api/photos
+Content-Type: multipart/form-data; boundary=----PhotoBoundary
+
+------PhotoBoundary
+Content-Disposition: form-data; name="file"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./samples/photo.jpg
+------PhotoBoundary--
+
+### 3. Upload a JPEG → 201, isMain true the first time, false after that
+POST {{baseUrl}}/api/photos
+Authorization: Bearer {{loginTom.response.body.token}}
+Content-Type: multipart/form-data; boundary=----PhotoBoundary
+
+------PhotoBoundary
+Content-Disposition: form-data; name="file"; filename="photo.jpg"
+Content-Type: image/jpeg
+
+< ./samples/photo.jpg
+------PhotoBoundary--
+
+### 4. Wrong file type → 400 "Only JPEG, PNG and WebP images are allowed."
+POST {{baseUrl}}/api/photos
+Authorization: Bearer {{loginTom.response.body.token}}
+Content-Type: multipart/form-data; boundary=----PhotoBoundary
+
+------PhotoBoundary
+Content-Disposition: form-data; name="file"; filename="notes.txt"
+Content-Type: text/plain
+
+this is not an image
+------PhotoBoundary--
