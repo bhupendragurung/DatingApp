@@ -22,6 +22,7 @@ Content-Type: image/jpeg
 ------PhotoBoundary--
 
 ### 3. Upload a JPEG → 201, isMain true the first time, false after that
+# @name uploadPhoto
 POST {{baseUrl}}/api/photos
 Authorization: Bearer {{loginTom.response.body.token}}
 Content-Type: multipart/form-data; boundary=----PhotoBoundary
@@ -44,3 +45,35 @@ Content-Type: text/plain
 
 this is not an image
 ------PhotoBoundary--
+
+### 5. Set the uploaded photo as main → 204
+PUT {{baseUrl}}/api/photos/{{uploadPhoto.response.body.id}}/main
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 6. Photo that doesn't exist (or isn't mine) → 404
+PUT {{baseUrl}}/api/photos/00000000-0000-0000-0000-000000000001/main
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 7. Not a guid → 404 (route constraint, handler 
+
+### 6. Photo that doesn't exist (or isn't mine) → 404
+PUT {{baseUrl}}/api/photos/00000000-0000-0000-0000-000000000001/main
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 7. Not a guid → 404 (route constraint, handler never runs)
+PUT {{baseUrl}}/api/photos/abc/main
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 8. Get the uploaded file straight from storage → 200 (the image)
+GET {{uploadPhoto.response.body.url}}
+
+### 9. Delete the uploaded photo → 204 (or 409 if it's the main photo)
+DELETE {{baseUrl}}/api/photos/{{uploadPhoto.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 10. Get the same file again → 404, it's gone from storage
+GET {{uploadPhoto.response.body.url}}
+
+### 11. Delete it again → 404, the row is gone too
+DELETE {{baseUrl}}/api/photos/{{uploadPhoto.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
