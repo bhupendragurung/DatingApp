@@ -63,3 +63,17 @@ Authorization: Bearer {{loginTom.response.body.token}}
 ### 7. Not a guid → 404 (route constraint, handler never runs)
 PUT {{baseUrl}}/api/photos/abc/main
 Authorization: Bearer {{loginTom.response.body.token}}
+
+### 8. Get the uploaded file straight from storage → 200 (the image)
+GET {{uploadPhoto.response.body.url}}
+
+### 9. Delete the uploaded photo → 204 (or 409 if it's the main photo)
+DELETE {{baseUrl}}/api/photos/{{uploadPhoto.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 10. Get the same file again → 404, it's gone from storage
+GET {{uploadPhoto.response.body.url}}
+
+### 11. Delete it again → 404, the row is gone too
+DELETE {{baseUrl}}/api/photos/{{uploadPhoto.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
