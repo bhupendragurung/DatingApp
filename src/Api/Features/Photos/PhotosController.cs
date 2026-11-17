@@ -1,5 +1,6 @@
 using Api.Common;
 using Api.Common.Auth;
+using Api.Features.Photos.DeletePhoto;
 using Api.Features.Photos.SetMainPhoto;
 using Api.Features.Photos.UploadPhoto;
 using Mediator;
@@ -44,6 +45,26 @@ public sealed class PhotosController(ISender sender) : ControllerBase
         CancellationToken cancellationToken)
     {
         var command = new SetMainPhotoCommand(photoId)
+        {
+            UserId = User.GetUserId()
+        };
+
+        var result = await sender.Send(command, cancellationToken);
+
+        return result.IsSuccess
+            ? NoContent()
+            : this.ToProblem(result.Error);
+    }
+    [HttpDelete("{photoId:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult> Delete(
+        Guid photoId,
+        CancellationToken cancellationToken)
+    {
+        var command = new DeletePhotoCommand(photoId)
         {
             UserId = User.GetUserId()
         };
