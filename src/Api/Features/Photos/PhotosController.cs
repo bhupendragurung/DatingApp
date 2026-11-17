@@ -1,5 +1,6 @@
 using Api.Common;
 using Api.Common.Auth;
+using Api.Features.Photos.SetMainPhoto;
 using Api.Features.Photos.UploadPhoto;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
@@ -31,6 +32,26 @@ public sealed class PhotosController(ISender sender) : ControllerBase
 
         return result.IsSuccess
             ? StatusCode(StatusCodes.Status201Created, result.Value)
+            : this.ToProblem(result.Error);
+    }
+    
+    [HttpPut("{photoId:guid}/main")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> SetMain(
+        Guid photoId,
+        CancellationToken cancellationToken)
+    {
+        var command = new SetMainPhotoCommand(photoId)
+        {
+            UserId = User.GetUserId()
+        };
+
+        var result = await sender.Send(command, cancellationToken);
+
+        return result.IsSuccess
+            ? NoContent()
             : this.ToProblem(result.Error);
     }
 }
