@@ -1,4 +1,5 @@
 
+using Api.Features.Photos;
 using Domain.Common;
 using Infrastructure;
 using Mediator;
@@ -33,7 +34,12 @@ public sealed class GetMemberByIdHandler(AppDbContext db, TimeProvider timeProvi
                 u.LastActive,
                 u.Introduction,
                 u.LookingFor,
-                u.Interests))
+                u.Interests,
+                u.Photos
+                    .OrderByDescending(p => p.IsMain)
+                    .ThenBy(p => p.CreatedAt)
+                    .Select(p => new PhotoDto(p.Id, p.Url, p.IsMain))
+                    .ToList()))
             .SingleOrDefaultAsync(cancellationToken);
 
         return member is null
