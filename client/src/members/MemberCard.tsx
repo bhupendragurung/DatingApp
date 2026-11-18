@@ -7,9 +7,17 @@ export default function MemberCard({ member }: Props) {
   return (
     <Link to={`/members/${member.id}`} className="member-card-link">
       <article className="member-card">
-        <div className="member-avatar" aria-hidden="true">
-          {member.knownAs.charAt(0).toUpperCase()}
-        </div>
+       {member.photoUrl ? (
+  <img
+    src={member.photoUrl}
+    alt={member.knownAs}
+    className="member-avatar member-photo"
+  />
+) : (
+  <div className="member-avatar" aria-hidden="true">
+    {member.knownAs.charAt(0).toUpperCase()}
+  </div>
+)}
         <h2>
           {member.knownAs}, {member.age}
         </h2>

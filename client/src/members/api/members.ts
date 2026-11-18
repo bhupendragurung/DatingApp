@@ -9,6 +9,7 @@ export type Member = {
   city: string
   country: string
   lastActive: string
+  photoUrl: string | null
 }
 export type MemberDetail = Member & {
   createdAt: string
