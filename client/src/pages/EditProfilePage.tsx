@@ -3,6 +3,7 @@ import { Form, Link, useActionData, useBlocker, useLoaderData, useNavigation } f
 import type { editProfileAction } from '../members/editProfileAction'
 import type { editProfileLoader } from '../members/editProfileLoader'
 import PhotoUploadForm from '../members/PhotoUploadForm'
+import PhotoManager from '../members/PhotoManager'
 export default function EditProfilePage() {
   const member = useLoaderData<typeof editProfileLoader>()
   const result = useActionData<typeof editProfileAction>()
@@ -79,8 +80,9 @@ export default function EditProfilePage() {
     </Form>
 
     <section>
-      <h2>Photos</h2>
-      <PhotoUploadForm />
+       <h2>Photos</h2>
+  <PhotoManager photos={member.photos} />
+  <PhotoUploadForm />
     </section>
     </>
   )

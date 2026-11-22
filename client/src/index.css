@@ -283,3 +283,23 @@ main {
   object-fit: cover;
   border-radius: 8px;
 }
+.photo-manager {
+  list-style: none;
+  padding: 0;
+}
+
+.photo-manager li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.photo-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
