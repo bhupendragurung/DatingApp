@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Form, Link, useActionData, useBlocker, useLoaderData, useNavigation } from 'react-router'
 import type { editProfileAction } from '../members/editProfileAction'
 import type { editProfileLoader } from '../members/editProfileLoader'
-
+import PhotoUploadForm from '../members/PhotoUploadForm'
 export default function EditProfilePage() {
   const member = useLoaderData<typeof editProfileLoader>()
   const result = useActionData<typeof editProfileAction>()
@@ -30,6 +30,7 @@ export default function EditProfilePage() {
     return () => window.removeEventListener('beforeunload', onBeforeUnload)
   }, [isDirty])
   return (
+    <>
     <Form method="post" className="form form-wide" onChange={() => setIsDirty(true)}>
       <h1>Edit profile</h1>
 
@@ -76,5 +77,11 @@ export default function EditProfilePage() {
       </button>
       <Link to={`/members/${member.id}`}>Cancel</Link>
     </Form>
+
+    <section>
+      <h2>Photos</h2>
+      <PhotoUploadForm />
+    </section>
+    </>
   )
 }
