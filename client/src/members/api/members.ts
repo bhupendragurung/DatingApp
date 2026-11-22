@@ -11,11 +11,18 @@ export type Member = {
   lastActive: string
   photoUrl: string | null
 }
-export type MemberDetail = Member & {
+export type Photo = {
+  id: string
+  url: string
+  isMain: boolean
+}
+
+export type MemberDetail = Omit<Member, 'photoUrl'> & {
   createdAt: string
   introduction: string | null
   lookingFor: string | null
   interests: string | null
+  photos: Photo[]
 }
 export type PagedResult<T> = {
   items: T[]
