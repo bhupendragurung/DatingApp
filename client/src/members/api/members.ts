@@ -9,12 +9,20 @@ export type Member = {
   city: string
   country: string
   lastActive: string
+  photoUrl: string | null
 }
-export type MemberDetail = Member & {
+export type Photo = {
+  id: string
+  url: string
+  isMain: boolean
+}
+
+export type MemberDetail = Omit<Member, 'photoUrl'> & {
   createdAt: string
   introduction: string | null
   lookingFor: string | null
   interests: string | null
+  photos: Photo[]
 }
 export type PagedResult<T> = {
   items: T[]
@@ -57,4 +65,16 @@ export function updateProfile(data: UpdateProfileRequest): Promise<void> {
     method: 'PUT',
     body: JSON.stringify(data),
   })
+}
+export function uploadPhoto(file: File): Promise<Photo> {
+  const body = new FormData()
+  body.append('file', file)
+  return apiFetch<Photo>('/photos', { method: 'POST', body })
+}
+export function setMainPhoto(photoId: string): Promise<void> {
+  return apiFetch<void>(`/photos/${encodeURIComponent(photoId)}/main`, { method: 'PUT' })
+}
+
+export function deletePhoto(photoId: string): Promise<void> {
+  return apiFetch<void>(`/photos/${encodeURIComponent(photoId)}`, { method: 'DELETE' })
 }

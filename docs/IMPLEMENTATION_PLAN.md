@@ -48,7 +48,7 @@ Goal: upload and manage photos.
 - [x] P3.2 `feature/blob-storage`: Azure Blob Storage service (Azurite locally)
 - [x] P3.3 `feature/photo-upload`: upload endpoint, first photo becomes main
 - [x] P3.4 `feature/photo-main-delete`: set main, delete non-main, remove from storage
-- [ ] P3.5 `feature/photo-ui`: upload widget, manage photos, gallery on profile
+- [x] P3.5 `feature/photo-ui`: upload widget, manage photos, gallery on profile
 - [ ] P3.6 `feature/photo-tests`: tests for main-photo and delete rules
 
 Demo: upload photos, change the main photo, delete one, see the gallery.

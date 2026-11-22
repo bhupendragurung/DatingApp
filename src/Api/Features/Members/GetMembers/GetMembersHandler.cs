@@ -59,7 +59,11 @@ public sealed class GetMembersHandler(AppDbContext db, TimeProvider timeProvider
                 u.Gender,
                 u.City,
                 u.Country,
-                u.LastActive))
+                u.LastActive,
+                u.Photos
+                    .Where(p => p.IsMain)
+                    .Select(p => p.Url)
+                    .FirstOrDefault()))
             .ToPagedResultAsync(query.Page, query.PageSize, cancellationToken);
 
         return Result<PagedResult<MemberDto>>.Success(page);

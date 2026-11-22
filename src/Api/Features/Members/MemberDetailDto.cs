@@ -1,3 +1,5 @@
+using Api.Features.Photos;
+
 namespace Api.Features.Members;
 
 public sealed record MemberDetailDto(
@@ -12,4 +14,5 @@ public sealed record MemberDetailDto(
     DateTime LastActive,
     string? Introduction,
     string? LookingFor,
-    string? Interests);
+    string? Interests,
+    IReadOnlyList<PhotoDto> Photos);

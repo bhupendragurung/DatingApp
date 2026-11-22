@@ -267,3 +267,39 @@ main {
   font-size: 0.85rem;
   color: #6b7280;
 }
+.member-photo {
+  display: block;
+  object-fit: cover;
+}
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.photo-gallery img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.photo-manager {
+  list-style: none;
+  padding: 0;
+}
+
+.photo-manager li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.photo-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.photo-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+}

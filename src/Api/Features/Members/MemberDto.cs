@@ -8,5 +8,6 @@ public sealed record MemberDto(
     string Gender,
     string City,
     string Country,
-    DateTime LastActive
+    DateTime LastActive,
+    string? PhotoUrl
     );
