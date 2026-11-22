@@ -17,6 +17,8 @@ import { memberDetailLoader } from './members/memberDetailLoader'
 import EditProfilePage from './pages/EditProfilePage'
 import { editProfileLoader } from './members/editProfileLoader'
 import { editProfileAction } from './members/editProfileAction'
+import { uploadPhotoAction } from './members/uploadPhotoAction'
+
 export const routes: RouteObject[] = [
   {
     id: 'root',
@@ -39,6 +41,7 @@ export const routes: RouteObject[] = [
               { path: 'members', element: <MembersPage />, loader: membersLoader },
               { path: 'members/:id', element: <MemberDetailPage />, loader: memberDetailLoader },
               { path: 'profile/edit', element: <EditProfilePage />, loader: editProfileLoader, action: editProfileAction },
+              { path: 'profile/photos', action: uploadPhotoAction },
             ],
           },
         ],
