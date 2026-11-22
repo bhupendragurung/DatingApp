@@ -71,3 +71,10 @@ export function uploadPhoto(file: File): Promise<Photo> {
   body.append('file', file)
   return apiFetch<Photo>('/photos', { method: 'POST', body })
 }
+export function setMainPhoto(photoId: string): Promise<void> {
+  return apiFetch<void>(`/photos/${encodeURIComponent(photoId)}/main`, { method: 'PUT' })
+}
+
+export function deletePhoto(photoId: string): Promise<void> {
+  return apiFetch<void>(`/photos/${encodeURIComponent(photoId)}`, { method: 'DELETE' })
+}
