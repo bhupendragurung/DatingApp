@@ -66,3 +66,8 @@ export function updateProfile(data: UpdateProfileRequest): Promise<void> {
     body: JSON.stringify(data),
   })
 }
+export function uploadPhoto(file: File): Promise<Photo> {
+  const body = new FormData()
+  body.append('file', file)
+  return apiFetch<Photo>('/photos', { method: 'POST', body })
+}
