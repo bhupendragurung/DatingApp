@@ -55,7 +55,7 @@ Demo: upload photos, change the main photo, delete one, see the gallery.
 Decision needed in this phase: photo cropping approach.
 
 ## Phase 4: Likes
-- [ ] P4.1 `feature/like-model`: like entity and migration
+- [x] P4.1 `feature/like-model`: like entity and migration
 - [ ] P4.2 `feature/like-api`: like endpoint (no self-like, no duplicates), liked and liked-by lists with pagination
 - [ ] P4.3 `feature/like-ui`: like button on card and detail page, likes page
 - [ ] P4.4 `feature/like-tests`

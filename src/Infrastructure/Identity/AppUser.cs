@@ -19,6 +19,8 @@ public class AppUser : IdentityUser<Guid>
     public string? Introduction { get; set; }
     public string? LookingFor { get; set; }
     public string? Interests { get; set; }
-     public ICollection<Photo> Photos { get; set; } = [];
+    public ICollection<Photo> Photos { get; set; } = [];
+    public ICollection<UserLike> LikedUsers { get; set; } = [];
+    public ICollection<UserLike> LikedByUsers { get; set; } = [];
 }
 
