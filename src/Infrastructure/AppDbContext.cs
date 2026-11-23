@@ -13,7 +13,7 @@ namespace Infrastructure
     : IdentityDbContext<AppUser, AppRole, Guid>(options)
     {
     public DbSet<Photo> Photos => Set<Photo>();
-
+    public DbSet<UserLike> Likes => Set<UserLike>();      
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
