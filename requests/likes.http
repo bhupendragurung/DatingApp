@@ -1,0 +1,60 @@
+@baseUrl = http://localhost:5136
+
+### 1. Login as tom and keep the token
+# @name loginTom
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "userName": "tom",
+  "password": "Pa$$w0rd"
+}
+
+### 2. Get a member to like
+# @name members
+GET {{baseUrl}}/api/members
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 3. No token → 401
+POST {{baseUrl}}/api/likes/{{members.response.body.$.items[0].id}}
+
+### 4. Like the first member → 204
+POST {{baseUrl}}/api/likes/{{members.response.body.$.items[0].id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 5. Same like again → 409 "You have already liked this user."
+POST {{baseUrl}}/api/likes/{{members.response.body.$.items[0].id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 6. Like yourself → 400 "You cannot like yourself."
+POST {{baseUrl}}/api/likes/{{loginTom.response.body.id}}
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 7. Unknown user → 404 "The user was not found."
+POST {{baseUrl}}/api/likes/11111111-1111-1111-1111-111111111111
+Authorization: Bearer {{loginTom.response.body.token}}
+### 8. Tom's "liked" list → 200, contains the member from request 4
+GET {{baseUrl}}/api/likes?predicate=liked
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 9. No predicate → defaults to "liked", same result as 8
+GET {{baseUrl}}/api/likes
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 10. Bad predicate → 400 "Predicate must be 'liked' or 'likedBy'."
+GET {{baseUrl}}/api/likes?predicate=banana
+Authorization: Bearer {{loginTom.response.body.token}}
+
+### 11. Log in as the member tom liked
+# @name loginLiked
+POST {{baseUrl}}/api/account/login
+Content-Type: application/json
+
+{
+  "userName": "{{members.response.body.$.items[0].userName}}",
+  "password": "Pa$$w0rd"
+}
+
+### 12. Their "likedBy" list → 200, contains tom
+GET {{baseUrl}}/api/likes?predicate=likedBy
+Authorization: Bearer {{loginLiked.response.body.token}}
