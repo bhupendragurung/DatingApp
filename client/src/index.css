@@ -148,6 +148,8 @@ main {
   border: 1px solid #8884;
   border-radius: 8px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-card h2 {
@@ -351,4 +353,8 @@ main {
   border-bottom-color: #e0457b;
   color: #e0457b;
   font-weight: 600;
+}
+.member-card .like-form {
+  margin-top: auto;
+  padding-top: 0.75rem;
 }
