@@ -1,6 +1,7 @@
 using Api.Common;
 using Api.Common.Auth;
 using Api.Common.Paging;
+using Api.Features.Likes.GetLikedIds;
 using Api.Features.Likes.GetLikes;
 using Api.Features.Likes.LikeUser;
 using Api.Features.Members;
@@ -46,6 +47,19 @@ public sealed class LikesController(ISender sender) : ControllerBase
     {
         var result = await sender.Send(
             query with { CurrentUserId = User.GetUserId() },
+            cancellationToken);
+
+        return result.IsSuccess
+            ? Ok(result.Value)
+            : this.ToProblem(result.Error);
+    }
+    [HttpGet("ids")]
+    [ProducesResponseType<Guid[]>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<Guid[]>> GetLikedIds(CancellationToken cancellationToken)
+    {
+        var result = await sender.Send(
+            new GetLikedIdsQuery(User.GetUserId()),
             cancellationToken);
 
         return result.IsSuccess

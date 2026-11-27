@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router";
 import {getMembers, type MemberFilters} from "./api/members";
-
+import { getLikedIds } from '../likes/api/likes'
 function toNumber(value:string | null): number | undefined {
     if(!value) return undefined;
     const num = Number(value);
@@ -21,8 +21,9 @@ function filtersFromUrl(params: URLSearchParams): MemberFilters {
       }
 }
 
-export function membersLoader({ request }: LoaderFunctionArgs) {
+export async function membersLoader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const filters = filtersFromUrl(url.searchParams);
-  return getMembers(filters);
+  const [members, likedIds] = await Promise.all([getMembers(filters), getLikedIds()]);
+  return { ...members, likedIds };
 }

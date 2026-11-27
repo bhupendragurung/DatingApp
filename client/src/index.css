@@ -148,6 +148,8 @@ main {
   border: 1px solid #8884;
   border-radius: 8px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-card h2 {
@@ -302,4 +304,57 @@ main {
 .photo-badge {
   font-size: 0.85rem;
   font-weight: 600;
+}
+.member-card:hover,
+.member-card:focus-within {
+  border-color: #e0457b;
+}
+.like-form {
+  margin-top: 0.75rem;
+}
+
+.like-button {
+  padding: 0.4rem 1rem;
+  border: 1px solid #e0457b;
+  border-radius: 999px;
+  background: transparent;
+  color: #e0457b;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.like-button[aria-pressed='true'] {
+  background: #e0457b;
+  color: white;
+  cursor: default;
+}
+
+.like-form small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #c0392b;
+}
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #8884;
+}
+
+.tabs a {
+  padding: 0.5rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tabs a.active {
+  border-bottom-color: #e0457b;
+  color: #e0457b;
+  font-weight: 600;
+}
+.member-card .like-form {
+  margin-top: auto;
+  padding-top: 0.75rem;
 }

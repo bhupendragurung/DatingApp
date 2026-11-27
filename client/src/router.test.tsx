@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { createMemoryRouter, RouterProvider } from 'react-router'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { routes } from './router'
 import { setToken } from './auth/tokenStorage'
 
@@ -17,7 +17,17 @@ function fakeToken(userName: string, secondsFromNow = 3600) {
   return `header.${btoa(JSON.stringify({ unique_name: userName, exp }))}.signature`
 }
 
-beforeEach(() => localStorage.clear())
+beforeEach(() => {
+  localStorage.clear()
+  vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+    const body = url.startsWith('/api/likes/ids')
+      ? []
+      : { items: [], page: 1, pageSize: 10, totalCount: 0, totalPages: 0 }
+    return Response.json(body)
+  }))
+})
+
+afterEach(() => vi.unstubAllGlobals())
 
 describe('routes', () => {
   it('shows the home page at /', async () => {
