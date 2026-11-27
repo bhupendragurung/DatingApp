@@ -5,7 +5,7 @@ import type { membersLoader } from '../members/membersLoader'
 import MemberFilterForm from '../members/MemberFilterForm'
 import Pagination from '../members/Pagination'
 export default function MembersPage() {
-  const { items, totalCount, page, totalPages } = useLoaderData<typeof membersLoader>()
+   const { items, totalCount, page, totalPages, likedIds } = useLoaderData<typeof membersLoader>()
 
   return (
     <section>
@@ -17,7 +17,7 @@ export default function MembersPage() {
       ) : (
         <div className="member-grid">
           {items.map((member) => (
-            <MemberCard key={member.id} member={member} />
+            <MemberCard key={member.id} member={member} liked={likedIds.includes(member.id)} />
           ))}
         </div>
       )}

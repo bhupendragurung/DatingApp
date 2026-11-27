@@ -303,3 +303,32 @@ main {
   font-size: 0.85rem;
   font-weight: 600;
 }
+.member-card:hover,
+.member-card:focus-within {
+  border-color: #e0457b;
+}
+.like-form {
+  margin-top: 0.75rem;
+}
+
+.like-button {
+  padding: 0.4rem 1rem;
+  border: 1px solid #e0457b;
+  border-radius: 999px;
+  background: transparent;
+  color: #e0457b;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.like-button[aria-pressed='true'] {
+  background: #e0457b;
+  color: white;
+  cursor: default;
+}
+
+.like-form small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #c0392b;
+}

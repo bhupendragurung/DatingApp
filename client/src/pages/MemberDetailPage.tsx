@@ -1,8 +1,9 @@
 import { Link, useLoaderData } from 'react-router'
 import type { memberDetailLoader } from '../members/memberDetailLoader'
 import { timeAgo } from '../members/timeAgo'
+import LikeButton from '../likes/LikeButton'
 export default function MemberDetailPage() {
-  const member = useLoaderData<typeof memberDetailLoader>()
+    const { member, isLiked } = useLoaderData<typeof memberDetailLoader>()
   const mainPhoto = member.photos.find((p) => p.isMain)
   const memberSince = new Date(member.createdAt).toLocaleDateString(undefined, {
     month: 'long',
@@ -35,6 +36,7 @@ export default function MemberDetailPage() {
             {member.city}, {member.country} · Member since {memberSince}
           </p>
             <p className="last-active">Active {timeAgo(member.lastActive)}</p>
+             <LikeButton targetUserId={member.id} liked={isLiked} />
         </div>
       </header>
 

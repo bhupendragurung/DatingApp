@@ -1,8 +1,11 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { getMember } from "./api/members";
-export function memberDetailLoader({ params }: LoaderFunctionArgs) {
-     if (!params.id) {
+import { getLikedIds } from "../likes/api/likes";
+
+export async function memberDetailLoader({ params }: LoaderFunctionArgs) {
+  if (!params.id) {
     throw new Response('Member not found', { status: 404, statusText: 'Not Found' })
-     }
-  return getMember(params.id);
+  }
+  const [member, likedIds] = await Promise.all([getMember(params.id), getLikedIds()]);
+  return { member, isLiked: likedIds.includes(member.id) };
 }
