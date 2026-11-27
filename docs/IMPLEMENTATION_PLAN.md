@@ -57,7 +57,7 @@ Decision needed in this phase: photo cropping approach.
 ## Phase 4: Likes
 - [x] P4.1 `feature/like-model`: like entity and migration
 - [x] P4.2 `feature/like-api`: like endpoint (no self-like, no duplicates), liked and liked-by lists with pagination
-- [ ] P4.3 `feature/like-ui`: like button on card and detail page, likes page
+- [x] P4.3 `feature/like-ui`: like button on card and detail page, likes page
 - [ ] P4.4 `feature/like-tests`
 
 Demo: like from both places, see both lists.
