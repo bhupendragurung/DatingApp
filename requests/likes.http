@@ -58,3 +58,6 @@ Content-Type: application/json
 ### 12. Their "likedBy" list → 200, contains tom
 GET {{baseUrl}}/api/likes?predicate=likedBy
 Authorization: Bearer {{loginLiked.response.body.token}}
+### 13. Tom's liked ids → 200, a JSON array with the id from request 4
+GET {{baseUrl}}/api/likes/ids
+Authorization: Bearer {{loginTom.response.body.token}}
